@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React with CDN</title>
+  <!-- Add React and ReactDOM CDN links -->
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <!-- Add Babel CDN for JSX transpilation -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // React component using JSX
+    const NavBar = () => {
+      const [isExpanded, setIsExpanded] = React.useState(false);
+
+      const handleHamburgerClick = () => {
+        const hamburger = document.getElementById('hamburger-1');
+        hamburger.classList.toggle('is-active');
+      };
+
+      const handleNavClick = () => {
+        const nav = document.querySelector('.nav');
+        if (isExpanded) {
+          nav.style.width = '3%';
+          nav.style.backgroundColor = '#1c1c1c';
+        } else {
+          nav.style.width = '16%';
+          nav.style.backgroundColor = '#1c1c1c';
+        }
+        setIsExpanded(!isExpanded);
+      };
+
+      return (
+        <div>
+          <div className="rowcf" data-scroll-section>
+            <div className="three col">
+              <div className="hamburger" id="hamburger-1" onClick={handleHamburgerClick}>
+                <span className="line"></span>
+                <span className="line"></span>
+                <span className="line"></span>
+              </div>
+            </div>
+          </div>
+          <nav id="menuBar">
+            <div className="nav">
+              <ul className="nav-desc">
+                <li><a href="#i" data-scroll-to>INTRODUCTION</a></li>
+                <li><a href="#a" data-scroll-to>ABOUT</a></li>
+                {/* Other list items */}
+              </ul>
+              <ul className="nav-icon">
+                <li><div className="-icon"><a href="#i" className="active" data-scroll-to="#i"><i className="bi bi-house-door active"></i></a></div></li>
+                {/* Other list items */}
+              </ul>
+            </div>
+          </nav>
+        </div>
+      );
+    };
+
+    // Render the NavBar component in the root div after transpiling JSX
+    ReactDOM.render(<NavBar />, document.getElementById('root'));
+  </script>
+</body>
+</html>
